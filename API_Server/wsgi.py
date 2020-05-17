@@ -12,6 +12,6 @@ import sys
 from django.core.wsgi import get_wsgi_application
 
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'API_Server.settings')
-# sys.path.append('C:/Apache24/htdocs')
+sys.path.append('C:/Github_Project/API-Server')
 
 application = get_wsgi_application()

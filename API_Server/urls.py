@@ -16,15 +16,18 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from rest_framework import routers
-import Analysis.api
+from Analysis import views
 
 
 app_name = 'analysis'
 
 router = routers.DefaultRouter()
-router.register('analysis', Analysis.api.AnalysisViewSet)
+router.register(r'analysis', views.AnalysisViewSet)
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path(r'api/v1/', include((router.urls, 'Analysis'), namespace='api')),
+    path('', include(router.urls)),
+    path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),
+
+    # path(r'api/v1/', include((router.urls, 'Analysis'), namespace='api')),
 ]
