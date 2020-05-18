@@ -15,19 +15,21 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-from rest_framework import routers
+# from rest_framework import routers
 from Analysis import views
 
 
 app_name = 'analysis'
 
-router = routers.DefaultRouter()
-router.register(r'analysis', views.AnalysisViewSet)
+"""router = routers.DefaultRouter()
+router.register(r'analysis', views.index)"""
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', include(router.urls)),
-    path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),
+    # path('', include(router.urls)),
+    # path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),
 
-    # path(r'api/v1/', include((router.urls, 'Analysis'), namespace='api')),
+    # path(r'analysis/', include((router.urls, 'analysis'), namespace='analysis')),
+    # path('analysis/', include('analysis.urls')),
+    path('analysis/', views.index),
 ]
