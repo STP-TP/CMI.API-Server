@@ -23,21 +23,26 @@ CONFIG_SECRET_COMMON_FILE = os.path.join(CONFIG_SECRET_DIR, 'settings_common.jso
 CONFIG_SECRET_DEBUG_FILE = os.path.join(CONFIG_SECRET_DIR, 'settings_debug.json')
 CONFIG_SECRET_RELEASE_FILE = os.path.join(CONFIG_SECRET_DIR, 'settings_release.json')
 
+config_secret_common = (json.loads(open(CONFIG_SECRET_COMMON_FILE).read()))['django']
+config_secret_debug = (json.loads(open(CONFIG_SECRET_DEBUG_FILE).read()))['django']
+config_secret_release = (json.loads(open(CONFIG_SECRET_RELEASE_FILE).read()))['django']
+
+
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-config_secret_common = json.loads(open(CONFIG_SECRET_COMMON_FILE).read())
-SECRET_KEY = config_secret_common['django']['secret_key']
+
+SECRET_KEY = config_secret_common['setting']['secret_key']
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
 if DEBUG:
-    config_secret_build_type = json.loads(open(CONFIG_SECRET_DEBUG_FILE).read())
+    config_secret_build_type = config_secret_debug
 else:
-    config_secret_build_type = json.loads(open(CONFIG_SECRET_RELEASE_FILE).read())
-ALLOWED_HOSTS = config_secret_build_type['django']['allowed_hosts']
+    config_secret_build_type = config_secret_release
+ALLOWED_HOSTS = config_secret_build_type['allowed_hosts']
 
 # Application definition
 
@@ -49,7 +54,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
-    'Analysis'
+    'Analysis',
 ]
 
 MIDDLEWARE = [
@@ -91,7 +96,7 @@ REST_FRAMEWORK = {
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
 
 DATABASES = {
-    'default': config_secret_common['django']['database']
+    'default': config_secret_common['setting']['database']
 }
 
 
