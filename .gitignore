@@ -1,3 +1,5 @@
 ## Django personal setting values ##
 /.config_secret/*.*
 .idea
+**/__pycache__
+**/migrations
