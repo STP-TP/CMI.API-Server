@@ -37,7 +37,7 @@ class matchtbl(models.Model):
 
 
 class match_detailtbl(models.Model):
-    locals()[MAP_ID] = models.CharField(max_length=255)
+    locals()[MATCH_ID] = models.CharField(max_length=255)
     locals()[PLAYER_ID] = models.CharField(max_length=255)
     locals()[RESULT] = models.CharField(max_length=255)
     locals()[RANDOM] = models.BooleanField()
